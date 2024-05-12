@@ -40,8 +40,6 @@ public class JanelaLogin extends javax.swing.JFrame {
         lblSenha2 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JTextField();
         btLogar = new javax.swing.JButton();
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,11 +64,6 @@ public class JanelaLogin extends javax.swing.JFrame {
             }
         });
 
-        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblNome.setText("Nome:");
-
-        txtNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,20 +77,14 @@ public class JanelaLogin extends javax.swing.JFrame {
                         .addGap(164, 164, 164)
                         .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNome)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblSenha2)
-                                    .addComponent(lblCpf))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(lblSenha2)
+                            .addComponent(lblCpf))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -105,13 +92,7 @@ public class JanelaLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(lblLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCpf)
                     .addGroup(layout.createSequentialGroup()
@@ -203,13 +184,7 @@ public class JanelaLogin extends javax.swing.JFrame {
         this.lblLogin = lblLogin;
     }
 
-    public JLabel getLblNome() {
-        return lblNome;
-    }
 
-    public void setLblNome(JLabel lblNome) {
-        this.lblNome = lblNome;
-    }
 
     public JLabel getLblSenha2() {
         return lblSenha2;
@@ -227,13 +202,7 @@ public class JanelaLogin extends javax.swing.JFrame {
         this.txtCpf = txtCpf;
     }
 
-    public JTextField getTxtNome() {
-        return txtNome;
-    }
 
-    public void setTxtNome(JTextField txtNome) {
-        this.txtNome = txtNome;
-    }
 
     public JTextField getTxtSenha() {
         return txtSenha;
@@ -282,10 +251,8 @@ public class JanelaLogin extends javax.swing.JFrame {
     private javax.swing.JButton btLogar;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblLogin;
-    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha2;
     private javax.swing.JTextField txtCpf;
-    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
 }

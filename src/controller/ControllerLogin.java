@@ -21,7 +21,7 @@ public class ControllerLogin {
     }
      
     public void salvaLogin(){
-        Login login = new Login(view.getTxtNome().getText(),view.getTxtCpf().getText(),view.getTxtSenha().getText());
+        Login login = new Login(null,view.getTxtCpf().getText(),view.getTxtSenha().getText());
         Conexao conexao = new Conexao();
         
         try{
@@ -30,7 +30,6 @@ public class ControllerLogin {
             ResultSet res = dao.consultar(login);
             if(res.next()){
                 JOptionPane.showMessageDialog(view, "Login Feito", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                String nome = res.getString("nome");
                 String cpf = res.getString("cpf");
                 String senha = res.getString("senha");
                 new JanelaFuncoes().setVisible(true);
