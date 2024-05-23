@@ -71,5 +71,13 @@ public class ContaDAO {
             }
         }
     }
+         public void sacar(String cpf, double valor) throws SQLException {
+        String sql = "update usuarios set saldo = saldo - ? where cpf = ?";
+        try (PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setDouble(1, valor);
+            statement.setString(2, cpf);
+            statement.executeUpdate();
+        }
+    }
 }
 

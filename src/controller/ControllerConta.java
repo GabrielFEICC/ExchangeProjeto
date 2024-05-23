@@ -7,6 +7,7 @@ import view.JanelaDeposito;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import view.JanelaSacar;
 import view.JanelaSaldo;
 //import view.JanelaFuncoes;
 
@@ -53,6 +54,26 @@ public void depositar(String cpf, double valor) {
             viewSaldo.setVisible(true);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(viewSaldo, "Erro ao consultar saldo!", "Erro", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }
+    
+    public void sacar(String cpf, double valor) {
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            ContaDAO dao = new ContaDAO(conn);
+            double saldoAtual = dao.obterSaldo(cpf);
+            if (saldoAtual >= valor) {
+                double novoSaldo = saldoAtual - valor;
+                dao.atualizarSaldo(cpf, novoSaldo);
+                mostrarSaldo(cpf);
+                JOptionPane.showMessageDialog(viewSaldo, "Saque realizado com sucesso!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(viewSaldo, "Saldo insuficiente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(viewSaldo, "Erro ao realizar saque!", "Erro", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
     }

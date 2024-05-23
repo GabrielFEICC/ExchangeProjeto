@@ -5,6 +5,8 @@
 package view;
 
 import controller.ControllerConta;
+import controller.ControllerSacar;
+import javax.swing.JOptionPane;
 import model.Login;
 import view.JanelaDeposito;
 /**
@@ -19,10 +21,8 @@ public class JanelaFuncoes extends javax.swing.JFrame {
     public JanelaFuncoes(String cpf) {
         this.cpf = cpf;
         initComponents();
+        
     }
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,7 +164,11 @@ public class JanelaFuncoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btDepositarActionPerformed
 
     private void btSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSacarActionPerformed
-        // TODO add your handling code here:
+        //new JanelaSacar(cpf).setVisible(true);
+        JanelaSacar js = new JanelaSacar(cpf);
+        ControllerSacar controllerSacar = new ControllerSacar(js);
+        js.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btSacarActionPerformed
 
     private void btComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprarActionPerformed
