@@ -4,17 +4,20 @@
  */
 package view;
 
+import controller.ControllerConta;
+
 
 /**
  *
  * @author Gabriel
  */
 public class JanelaDeposito extends javax.swing.JFrame {
-
+    private String cpf;
     /**
      * Creates new form JanelaDeposito
      */
-    public JanelaDeposito() {
+    public JanelaDeposito(String cpf) {
+        this.cpf = cpf;
         initComponents();
     }
 
@@ -78,8 +81,9 @@ public class JanelaDeposito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDepositarActionPerformed
-        JanelaSaldo sal = new JanelaSaldo();
-        sal.setVisible(true);
+        double valor = Double.parseDouble(txtDeposito.getText());
+        ControllerConta controller = new ControllerConta(JanelaDeposito.this, new JanelaSaldo(cpf));
+        controller.depositar(cpf, valor);
     }//GEN-LAST:event_btDepositarActionPerformed
 
     /**

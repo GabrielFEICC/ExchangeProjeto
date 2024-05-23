@@ -4,6 +4,14 @@
  */
 package view;
 
+import DAO.Conexao;
+import DAO.ContaDAO;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
 
 
 /**
@@ -11,12 +19,84 @@ package view;
  * @author Gabriel
  */
 public class JanelaSaldo extends javax.swing.JFrame {
-
+    private String cpf;
     /**
      * Creates new form JanelaSaldo
      */
-    public JanelaSaldo() {
+    public JanelaSaldo(String cpf) {
+        this.cpf = cpf;
         initComponents();
+        exibirSaldo();
+    }
+    
+    
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public JButton getBtSaldo() {
+        return btSaldo;
+    }
+
+    public void setBtSaldo(JButton btSaldo) {
+        this.btSaldo = btSaldo;
+    }
+
+    public JLabel getLblBtc() {
+        return lblBtc;
+    }
+
+    public void setLblBtc(JLabel lblBtc) {
+        this.lblBtc = lblBtc;
+    }
+
+    public JLabel getLblEth() {
+        return lblEth;
+    }
+
+    public void setLblEth(JLabel lblEth) {
+        this.lblEth = lblEth;
+    }
+
+    public JLabel getLblMostra() {
+        return lblMostra;
+    }
+
+    public void setLblMostra(JLabel lblMostra) {
+        this.lblMostra = lblMostra;
+    }
+
+    public JLabel getLblReal() {
+        return lblReal;
+    }
+
+    public void setLblReal(JLabel lblReal) {
+        this.lblReal = lblReal;
+    }
+
+    public JLabel getLblSaldo() {
+        return lblSaldo;
+    }
+
+    public void setLblSaldo(JLabel lblSaldo) {
+        this.lblSaldo = lblSaldo;
+    }
+
+    public JLabel getLblXrd() {
+        return lblXrd;
+    }
+
+    public void setLblXrd(JLabel lblXrd) {
+        this.lblXrd = lblXrd;
+    }
+    
+        public void setSaldo(double saldo) {
+        lblMostra.setText(String.valueOf(saldo));
     }
     
 
@@ -31,6 +111,11 @@ public class JanelaSaldo extends javax.swing.JFrame {
 
         lblSaldo = new javax.swing.JLabel();
         btSaldo = new javax.swing.JButton();
+        lblReal = new javax.swing.JLabel();
+        lblBtc = new javax.swing.JLabel();
+        lblEth = new javax.swing.JLabel();
+        lblXrd = new javax.swing.JLabel();
+        lblMostra = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +130,21 @@ public class JanelaSaldo extends javax.swing.JFrame {
             }
         });
 
+        lblReal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblReal.setText("Reais:");
+
+        lblBtc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblBtc.setText("Bitcoin:");
+
+        lblEth.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEth.setText("Eth:");
+
+        lblXrd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblXrd.setText("Xrd:");
+
+        lblMostra.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMostra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -52,28 +152,46 @@ public class JanelaSaldo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(lblSaldo))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
-                        .addComponent(btSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(163, Short.MAX_VALUE))
+                        .addComponent(btSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblReal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMostra, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblSaldo)
+                            .addComponent(lblBtc)
+                            .addComponent(lblEth)
+                            .addComponent(lblXrd))))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(26, 26, 26)
                 .addComponent(lblSaldo)
-                .addGap(151, 151, 151)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblReal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMostra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBtc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblEth)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblXrd)
+                .addGap(32, 32, 32)
                 .addComponent(btSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaldoActionPerformed
-        new JanelaFuncoes().setVisible(true);
+        new JanelaFuncoes(cpf).setVisible(true);
     }//GEN-LAST:event_btSaldoActionPerformed
 
     /**
@@ -110,9 +228,34 @@ public class JanelaSaldo extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-
+    private void exibirSaldo() {
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            String sql = "select saldo from usuarios where cpf = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, cpf);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        double saldo = rs.getDouble("saldo");
+                        lblMostra.setText(Double.toString(saldo));
+                    } else {
+                        lblMostra.setText("0.0"); // ou qualquer valor padrão
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            // Trate ou registre a exceção adequadamente
+            ex.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSaldo;
+    private javax.swing.JLabel lblBtc;
+    private javax.swing.JLabel lblEth;
+    private javax.swing.JLabel lblMostra;
+    private javax.swing.JLabel lblReal;
     private javax.swing.JLabel lblSaldo;
+    private javax.swing.JLabel lblXrd;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,18 +4,20 @@
  */
 package view;
 
+import controller.ControllerConta;
 import model.Login;
-
+import view.JanelaDeposito;
 /**
  *
  * @author Gabriel
  */
 public class JanelaFuncoes extends javax.swing.JFrame {
-
+    private String cpf;
     /**
      * Creates new form JanelaFuncoes
      */
-    public JanelaFuncoes() {
+    public JanelaFuncoes(String cpf) {
+        this.cpf = cpf;
         initComponents();
     }
 
@@ -154,7 +156,11 @@ public class JanelaFuncoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btConsultaExtratoActionPerformed
 
     private void btDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDepositarActionPerformed
-        new JanelaDeposito().setVisible(true);
+    JanelaDeposito janelaDeposito = new JanelaDeposito(cpf);
+    ControllerConta controllerConta = new ControllerConta(janelaDeposito, new JanelaSaldo(cpf));
+    janelaDeposito.setVisible(true);
+    this.setVisible(false);
+
     }//GEN-LAST:event_btDepositarActionPerformed
 
     private void btSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSacarActionPerformed
@@ -174,7 +180,7 @@ public class JanelaFuncoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btAtualizaActionPerformed
 
     private void btConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsultaActionPerformed
-        new JanelaSaldo().setVisible(true);
+        new JanelaSaldo(cpf).setVisible(true);
     }//GEN-LAST:event_btConsultaActionPerformed
 
     /**

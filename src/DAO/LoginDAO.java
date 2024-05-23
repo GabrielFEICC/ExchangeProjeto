@@ -15,20 +15,20 @@ public class LoginDAO {
     }
     
     public void inserir(Login login) throws SQLException{
-        String sql = "insert into logins(nome, cpf, senha) values ('" +login.getNome() + "', '" +login.getCpf()+"', '" +login.getSenha()+"')";
+        String sql = "insert into usuarios(nome, cpf, senha) values ('" +login.getNome() + "', '" +login.getCpf()+"', '" +login.getSenha()+"')";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.execute();
         conn.close();
     }
     
     public ResultSet consultar(Login login) throws SQLException{
-        String sql = "select * from logins where cpf = ? and senha = ?";
+        String sql = "select * from usuarios where cpf = ? and senha = ?";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, login.getCpf());
         statement.setString(2, login.getSenha());
         statement.execute();
         ResultSet resultado = statement.getResultSet();
-        return resultado;
+        return resultado;   
     }
-
+    
 }
