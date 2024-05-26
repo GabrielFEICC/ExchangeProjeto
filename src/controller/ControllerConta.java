@@ -2,6 +2,7 @@ package controller;
 
 import DAO.Conexao;
 import DAO.ContaDAO;
+
 import view.JanelaDeposito;
 //import view.JanelaSaldo;
 import java.sql.Connection;
@@ -14,10 +15,13 @@ import view.JanelaSaldo;
 public class ControllerConta {
     private JanelaDeposito view;
     private JanelaSaldo viewSaldo;
+    
+
 
     public ControllerConta(JanelaDeposito view, JanelaSaldo viewSaldo) {
         this.view = view;
         this.viewSaldo = viewSaldo;
+
     }
 
 public void depositar(String cpf, double valor) {
@@ -76,5 +80,5 @@ public void depositar(String cpf, double valor) {
             JOptionPane.showMessageDialog(viewSaldo, "Erro ao realizar saque!", "Erro", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
-    }
+    }  
 }

@@ -7,6 +7,9 @@ package view;
 import controller.ControllerConta;
 import controller.ControllerCripto;
 import controller.ControllerSacar;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Login;
 import view.JanelaDeposito;
@@ -163,7 +166,7 @@ public class JanelaFuncoes extends javax.swing.JFrame {
 
     private void btDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDepositarActionPerformed
     JanelaDeposito janelaDeposito = new JanelaDeposito(cpf);
-    ControllerConta controllerConta = new ControllerConta(janelaDeposito, new JanelaSaldo(cpf));
+//    ControllerConta controllerConta = new ControllerConta(janelaDeposito, new JanelaSaldo(cpf));
     janelaDeposito.setVisible(true);
     this.setVisible(false);
 
@@ -178,7 +181,13 @@ public class JanelaFuncoes extends javax.swing.JFrame {
     }//GEN-LAST:event_btSacarActionPerformed
 
     private void btComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprarActionPerformed
-        // TODO add your handling code here:
+        JanelaComprarCripto janelaCompraCripto = null;
+        try {
+            janelaCompraCripto = new JanelaComprarCripto(cpf); // Passa o CPF do usuário para a JanelaCompraCripto
+        } catch (SQLException ex) {
+            Logger.getLogger(JanelaFuncoes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        janelaCompraCripto.setVisible(true);
     }//GEN-LAST:event_btComprarActionPerformed
 
     private void btVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVenderActionPerformed

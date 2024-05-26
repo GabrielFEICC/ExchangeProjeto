@@ -5,6 +5,10 @@ import DAO.CriptoDAO;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import model.Moeda;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import view.JanelaCotacoes;
 
 public class ControllerCripto {
@@ -13,6 +17,7 @@ public class ControllerCripto {
     private Moeda btc;
     private Moeda eth;
     private Moeda xrp;
+    private Connection conn;
 
     public JanelaCotacoes getView() {
         return view;
@@ -82,5 +87,27 @@ public class ControllerCripto {
             JOptionPane.showMessageDialog(view, "Erro ao atualizar cotação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+        public void atualizarSaldoCripto(String cpf, String nome, double quantidade) throws SQLException {
+        String column = "saldo_" + nome;
+        String query = "UPDATE usuarios SET " + column + " = " + column + " + ? WHERE cpf = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setDouble(1, quantidade);
+            statement.setString(2, cpf);
+            statement.executeUpdate();
+        }
+    }
+
+    public double consultarQuantidade(String cpf, String nome) throws SQLException {
+        String column = "saldo_" + nome;
+        String query = "SELECT " + column + " FROM usuarios WHERE cpf = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setString(1, cpf);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getDouble(column);
+            } else {
+                return 0;
+            }
+        }
+}
 }

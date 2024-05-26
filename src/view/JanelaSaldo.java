@@ -6,12 +6,16 @@ package view;
 
 import DAO.Conexao;
 import DAO.ContaDAO;
+import controller.ControllerCompraVenda;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 /**
@@ -20,13 +24,19 @@ import java.sql.PreparedStatement;
  */
 public class JanelaSaldo extends javax.swing.JFrame {
     private String cpf;
+  
+
     /**
      * Creates new form JanelaSaldo
      */
-    public JanelaSaldo(String cpf) {
+    public JanelaSaldo(String cpf)  {
         this.cpf = cpf;
         initComponents();
         exibirSaldo();
+        //exibirSaldo2(cpf);
+        //exibirSaldoCriptomoedas();
+
+
     }
     
     
@@ -87,18 +97,43 @@ public class JanelaSaldo extends javax.swing.JFrame {
         this.lblSaldo = lblSaldo;
     }
 
-    public JLabel getLblXrd() {
-        return lblXrd;
+    public JLabel getLblXrp() {
+        return lblXrp;
     }
 
-    public void setLblXrd(JLabel lblXrd) {
-        this.lblXrd = lblXrd;
+    public void setLblXrp(JLabel lblXrp) {
+        this.lblXrp = lblXrp;
     }
+    public void setSaldoBtc(double saldoBtc){
+        lblMostraBtc.setText(String.valueOf(saldoBtc));
+    }
+    public void setSaldoEth(double saldoEth){
+        lblMostraEth.setText(String.valueOf(saldoEth));
+    }
+    public void setSaldoXrp(double saldoXrp){
+        lblMostraXrp.setText(String.valueOf(saldoXrp));
+    }
+    
     
         public void setSaldo(double saldo) {
         lblMostra.setText(String.valueOf(saldo));
     }
     
+//        public void setSaldoCriptomoeda(String moeda, double saldoCripto) {
+//        switch (moeda) {
+//            case "saldo_btc":
+//                lblMostraBtc.setText(String.valueOf(saldoCripto));
+//                break;
+//            case "saldo_eth":
+//                lblMostraEth.setText(String.valueOf(saldoCripto));
+//                break;
+//            case "saldo_xrp":
+//                lblMostraXrp.setText(String.valueOf(saldoCripto));
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,8 +149,11 @@ public class JanelaSaldo extends javax.swing.JFrame {
         lblReal = new javax.swing.JLabel();
         lblBtc = new javax.swing.JLabel();
         lblEth = new javax.swing.JLabel();
-        lblXrd = new javax.swing.JLabel();
+        lblXrp = new javax.swing.JLabel();
         lblMostra = new javax.swing.JLabel();
+        lblMostraBtc = new javax.swing.JLabel();
+        lblMostraEth = new javax.swing.JLabel();
+        lblMostraXrp = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,11 +177,20 @@ public class JanelaSaldo extends javax.swing.JFrame {
         lblEth.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEth.setText("Eth:");
 
-        lblXrd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblXrd.setText("Xrd:");
+        lblXrp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblXrp.setText("Xrp:");
 
         lblMostra.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblMostra.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblMostraBtc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMostraBtc.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblMostraEth.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMostraEth.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblMostraXrp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblMostraXrp.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,10 +209,19 @@ public class JanelaSaldo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblMostra, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblSaldo)
-                            .addComponent(lblBtc)
-                            .addComponent(lblEth)
-                            .addComponent(lblXrd))))
-                .addContainerGap(103, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblBtc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMostraBtc, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEth)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblMostraEth, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblXrp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMostraXrp, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,14 +233,20 @@ public class JanelaSaldo extends javax.swing.JFrame {
                     .addComponent(lblReal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblMostra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBtc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblEth)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBtc)
+                    .addComponent(lblMostraBtc, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblXrd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblEth)
+                    .addComponent(lblMostraEth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblXrp)
+                    .addComponent(lblMostraXrp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addComponent(btSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -249,13 +311,218 @@ public class JanelaSaldo extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
+    
+
+//    private void exibirSaldoCriptomoedas() {
+//        Conexao conexao = new Conexao();
+//        try {
+//            Connection conn = conexao.getConnection();
+//            String sql = "SELECT saldo_btc, saldo_eth, saldo_xrp FROM usuarios WHERE cpf = ?";
+//            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+//                stmt.setString(1, cpf);
+//                try (ResultSet rs = stmt.executeQuery()) {
+//                    if (rs.next()) {
+//                        double btc = rs.getDouble("saldo_btc");
+//                        double eth = rs.getDouble("saldo_eth");
+//                        double xrp = rs.getDouble("saldo_xrp");
+//                        setSaldoCriptomoeda("saldo_btc", btc);
+//                        setSaldoCriptomoeda("saldo_eth", eth);
+//                        setSaldoCriptomoeda("saldo_xrp", xrp);
+//                    }// else {
+////                        // Se não houver registros para o usuário, exiba 0 para todos os saldos
+////                        setSaldoCriptomoeda("saldo_btc", 0.0);
+////                        setSaldoCriptomoeda("saldo_eth", 0.0);
+////                        setSaldoCriptomoeda("saldo_xrp", 0.0);
+////                    }
+//                }
+//            }
+//        } catch (SQLException ex) {
+//            // Trate ou registre a exceção adequadamente
+//            ex.printStackTrace();
+//        }
+//        
+//        
+//    }
+
+//    private void atualizarInformacoes() {
+//        try {
+//            double saldo = controller.consultarSaldo(cpf);
+//            double btc = controller.consultarQuantidadeCripto(cpf, "btc");
+//            double eth = controller.consultarQuantidadeCripto(cpf, "eth");
+//            double xrp = controller.consultarQuantidadeCripto(cpf, "xrp");
+//            System.out.println("Saldo Atual: " + saldo);
+//            System.out.println("BTC Atual: " + btc);
+//            System.out.println("ETH Atual: " + eth);
+//            System.out.println("XRP Atual: " + xrp);
+//            lblSaldo.setText("Saldo: " + saldo);
+//            lblBtc.setText("BTC: " + btc);
+//            lblEth.setText("ETH: " + eth);
+//            lblXrp.setText("XRP: " + xrp);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(JanelaSaldo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+
+    
+    public void setSaldoBtc(double saldoBtc, String cpf) {
+        // Atualizar o saldo do Bitcoin na interface gráfica
+        // Por exemplo:
+        // btcLabel.setText(String.valueOf(saldoBtc));
+        // Atualizar o saldo do Bitcoin no banco de dados
+        try {
+            Connection conn = new Conexao().getConnection();
+            ContaDAO contaDAO = new ContaDAO(conn);
+            contaDAO.atualizaBtc(cpf, "btc", saldoBtc);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void setSaldoEth(double saldoEth, String cpf) {
+        // Atualizar o saldo do Ethereum na interface gráfica
+        // Por exemplo:
+        // ethLabel.setText(String.valueOf(saldoEth));
+        // Atualizar o saldo do Ethereum no banco de dados
+        try {
+            Connection conn = new Conexao().getConnection();
+            ContaDAO contaDAO = new ContaDAO(conn);
+            contaDAO.atualizaEth(cpf, "eth", saldoEth);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void setSaldoXrp(double saldoXrp, String cpf) {
+        // Atualizar o saldo do Ripple na interface gráfica
+        // Por exemplo:
+        // xrpLabel.setText(String.valueOf(saldoXrp));
+        // Atualizar o saldo do Ripple no banco de dados
+        try {
+            Connection conn = new Conexao().getConnection();
+            ContaDAO contaDAO = new ContaDAO(conn);
+            contaDAO.atualizaXrp(cpf, "xrp", saldoXrp);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+        public void atualizarSaldoCripto(String cpf, String nome, double quantidade) {
+    // Atualiza o saldo da criptomoeda na janela
+        if (nome.equals("btc")) {
+        // Atualiza saldo de BTC na janela
+        lblMostraBtc.setText(Double.toString(quantidade));
+    } else if (nome.equals("eth")) {
+        // Atualiza saldo de ETH na janela
+        lblMostraEth.setText(Double.toString(quantidade));
+    } else if (nome.equals("xrp")) {
+        // Atualiza saldo de XRP na janela
+        lblMostraXrp.setText(Double.toString(quantidade));
+    }
+ }     
+        
+//            public void exibirSaldo2(String cpf) {
+//    Conexao conexao = new Conexao();
+//    try {
+//        Connection conn = conexao.getConnection();
+//        String sql = "SELECT saldo, saldo_btc, saldo_eth, saldo_xrp FROM usuarios WHERE cpf = ?";
+//        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+//            stmt.setString(1, cpf);
+//            try (ResultSet rs = stmt.executeQuery()) {
+//                if (rs.next()) {
+//                    double saldoBtc = rs.getDouble("saldo_btc");
+//                    double saldoEth = rs.getDouble("saldo_eth");
+//                    double saldoXrp = rs.getDouble("saldo_xrp");
+//                    
+//                    // Exibir os saldos na interface
+//                    lblMostraBtc.setText(Double.toString(saldoBtc));
+//                    lblMostraEth.setText(Double.toString(saldoEth));
+//                    lblMostraXrp.setText(Double.toString(saldoXrp));
+//
+//                } else {
+//                    // Caso não haja saldo para esse usuário
+//                    lblMostraBtc.setText("0.0");
+//                    lblMostraEth.setText("0.0");
+//                    lblMostraXrp.setText("0.0");
+//                }
+//            }
+//        }
+//    } catch (SQLException ex) {
+//        // Trate ou registre a exceção adequadamente
+//        ex.printStackTrace();
+//    }
+//}
+    public void exibirSaldoEth(){
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            String sql = "select saldo_eth from usuarios where cpf = ?";
+            try(PreparedStatement stmt = conn.prepareStatement(sql)){
+                stmt.setString(1, cpf);
+             try(ResultSet rs = stmt.executeQuery()){
+                 if (rs.next()){
+                     double saldoEth = rs.getDouble("saldo_eth");
+                     lblMostraEth.setText(Double.toString(saldoEth));
+                 }
+             }
+            }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void exibirSaldoBtc(){
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            String sql = "select saldo_btc from usuarios where cpf = ?";
+            try(PreparedStatement stmt = conn.prepareStatement(sql)){
+                stmt.setString(1, cpf);
+             try(ResultSet rs = stmt.executeQuery()){
+                 if (rs.next()){
+                     double saldoBtc = rs.getDouble("saldo_btc");
+                     lblMostraBtc.setText(Double.toString(saldoBtc));
+                 }
+             }
+            }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    
+    public void exibirSaldoXrp(){
+        Conexao conexao = new Conexao();
+        try {
+            Connection conn = conexao.getConnection();
+            String sql = "select saldo_xrp from usuarios where cpf = ?";
+            try(PreparedStatement stmt = conn.prepareStatement(sql)){
+                stmt.setString(1, cpf);
+             try(ResultSet rs = stmt.executeQuery()){
+                 if (rs.next()){
+                     double saldoXrp = rs.getDouble("saldo_xrp");
+                     lblMostraXrp.setText(Double.toString(saldoXrp));
+                 }
+             }
+            }
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSaldo;
     private javax.swing.JLabel lblBtc;
     private javax.swing.JLabel lblEth;
     private javax.swing.JLabel lblMostra;
+    private javax.swing.JLabel lblMostraBtc;
+    private javax.swing.JLabel lblMostraEth;
+    private javax.swing.JLabel lblMostraXrp;
     private javax.swing.JLabel lblReal;
     private javax.swing.JLabel lblSaldo;
-    private javax.swing.JLabel lblXrd;
+    private javax.swing.JLabel lblXrp;
     // End of variables declaration//GEN-END:variables
+
+   
+
+
 }

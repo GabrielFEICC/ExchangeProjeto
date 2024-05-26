@@ -11,7 +11,7 @@ package model;
 public class Moeda {
    private String nome;
     private double cotacaoAtual;
-
+    
     public Moeda(String nome, double cotacaoAtual) {
         this.nome = nome;
         this.cotacaoAtual = cotacaoAtual;

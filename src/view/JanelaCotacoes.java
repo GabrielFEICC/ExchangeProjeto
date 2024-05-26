@@ -233,7 +233,7 @@ public class JanelaCotacoes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btAtualiza1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualiza1ActionPerformed
